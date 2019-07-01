@@ -25,7 +25,7 @@ io.on('connection', function (socket) {
         socket.emit('sendChannels', channels, serverNumber)
     });
     socket.on('fetchChannelMessages', function (serverNum, channelName) {
-        var fetched = bot.fetchMsgs("testy", channelName)
+        var fetched = bot.fetchMsgs(guilds[serverNum], channelName)
         var displayed = []
         var msgCount = 0
         fetched.then(function (messages) {
