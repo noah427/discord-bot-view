@@ -1,0 +1,25 @@
+{
+  "name": "discord-bot-view",
+  "version": "1.0.0",
+  "description": "see through the eyes of your bot",
+  "main": "server.js",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ok don't forget to fix this when I make one"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "noah427",
+  "license": "ISC"
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #navigator{
+            background-color: purple;
+            height: 280px;
+        }
+        #messageViewer{
+            background-color: rgb(91, 37, 177);
+            height: 400px;
+        }
+        .message{
+            color: greenyellow;
+        }
+        .channel{
+            background-color: green;
+        }
+        .serverName{
+            color: royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navigator"></div>
+    <div id="messageViewer"></div><br>
+    <input type="text" id="sendMessage" hidden="true">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        $(function () {
+            var socket = io.connect('http://localhost:8080');
+            socket.on('guilds', function (guilds) {
+                console.log('recieved')
+                for (let i = 0; i < guilds.length; i++) {
+                    console.log(i)
+                    console.log(guilds[i])
+                    $("#navigator").append(`<div class="server" id="serverContainer${i}"><h4 class="serverName" id="server${i}">${guilds[i]}</h4></div><br>`);
+                    $(`#server${i}`).click(function (event) {
+                        $(`#server${i}`).off('click')
+                        socket.emit('serverChannels', guilds[i], i)
+                    });
+                };
+            });
+            socket.on('sendChannels', function (channels, serverNumber) {
+                for (let i = 0; i < channels.length; i++) {
+                    $(`#serverContainer${serverNumber}`).append(`<button class="channel" id="server${serverNumber}channel${i}">${channels[i]}</button><br>`);
+                    $(`#server${serverNumber}channel${i}`).click(function (event) {
+                        socket.emit('fetchChannelMessages', serverNumber, channels[i]);
+                    });
+                };
+            });
+            socket.on('displayMessages', function (messages) {
+                $('#messageViewer').html('');
+                for (let i = 0; i < messages.length; i++) {
+                    $('#messageViewer').append(`<span class="message" id="message${i}">${messages[i]}</span><br>`);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
