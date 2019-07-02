@@ -3,22 +3,38 @@
 
 <head>
     <style>
-        #navigator{
+        #navigator {
             background-color: purple;
             height: 280px;
+            padding: 15px;
+            overflow: auto;
         }
-        #messageViewer{
+
+        #messageViewer {
             background-color: rgb(91, 37, 177);
-            height: 400px;
+            height: 50%;
+            padding: 15px;
         }
-        .message{
+
+        .message {
             color: greenyellow;
+            padding: 5px;
         }
-        .channel{
+
+        .channel {
             background-color: green;
+            padding: 10px;
+            margin: 5px;
         }
-        .serverName{
+
+        .serverName {
             color: royalblue;
+            padding: 2px;
+        }
+
+        .server {
+            display: flex;
+            flex-direction: row;
         }
     </style>
 </head>
@@ -37,7 +53,7 @@
                 for (let i = 0; i < guilds.length; i++) {
                     console.log(i)
                     console.log(guilds[i])
-                    $("#navigator").append(`<div class="server" id="serverContainer${i}"><h4 class="serverName" id="server${i}">${guilds[i]}</h4></div><br>`);
+                    $("#navigator").append(`<div class="server" id="serverContainer${i}"><br><h4 class="serverName" id="server${i}">${guilds[i]}</h4></div><br>`);
                     $(`#server${i}`).click(function (event) {
                         $(`#server${i}`).off('click')
                         socket.emit('serverChannels', guilds[i], i)
