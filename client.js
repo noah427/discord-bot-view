@@ -29,3 +29,9 @@ exports.fetchMsgs = async function (serverName, channelName) {
     return fetched
 }
 
+exports.sendChannelMessage = function(serverName, channelName, message){
+    var serverID = client.guilds.find(guild => guild.name === serverName)
+    var channelID = server.channels.find(channel => channel.name === channelName).id
+    server.channels.get(channelID).send(message)
+}
+

@@ -44,12 +44,22 @@
 <body>
     <div id="navigator"></div>
     <div id="messageViewer"></div><br>
-    <input type="text" id="sendMessage" hidden="true">
+    <input type="text" id="writeMessage"> <button id="sendMessage">send</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
         $(function () {
             var socket = io.connect('http://localhost:8080');
+
+            $("#sendMessage").click(function(event){
+                var currentChannel = localStorage.getItem("current-channel")
+                var currentServer = localStorage.getItem("current-server")
+                var message = $("#writeMessage").val()
+                socket.emit('sendChannelMessage', currentServer, currentChannel, message)
+                $("#messageViewer").append(`<span class="message">you said : ${message}</span><br>`)
+            })
+
+
             socket.on('guilds', function (guilds) {
                 console.log('recieved')
                 for (let i = 0; i < guilds.length; i++) {
@@ -67,6 +77,8 @@
                     $(`#serverContainer${serverNumber}`).append(`<button class="channel" id="server${serverNumber}channel${i}">${channels[i]}</button><br>`);
                     $(`#server${serverNumber}channel${i}`).click(function (event) {
                         socket.emit('fetchChannelMessages', serverNumber, channels[i]);
+                        localStorage.setItem("current-channel", channels[i])
+                        localStorage.setItem("current-server", serverNumber)
                     });
                 };
             });

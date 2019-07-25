@@ -39,6 +39,9 @@ io.on('connection', function (socket) {
             });
         })
     })
+    socket.on('sendChannelMessage', function(serverNum, channelName, message){
+        bot.sendChannelMessage(guilds[serverNum], channelName, message)
+    })
 })
 
 
