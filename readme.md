@@ -1,0 +1,1 @@
+npm start then point your browser to localhost:3000 to use 
