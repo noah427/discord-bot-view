@@ -2,23 +2,24 @@ const express = require('express')
 var app = express()
 var bot = require('./client')
 var io = require('socket.io')(8080);
+require('dotenv').config()
+
+bot.login(process.env.TOKEN)
+
+
+
+
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + "/public/index.html")
-})
-
-app.get('/login', function (req, res) {
-    bot.login(req.query.token)
     res.sendFile(__dirname + "/public/interface.html")
 })
 
 
+
+
 io.on('connection', function (socket) {
-    console.log("connected")
-
+    
     var guilds = bot.init()
-
-
     socket.emit('guilds', guilds)
     socket.on('serverChannels', (serverName, serverNumber) => {
         var channels = bot.fetchChannels(serverName)
@@ -39,7 +40,7 @@ io.on('connection', function (socket) {
             });
         })
     })
-    socket.on('sendChannelMessage', function(serverNum, channelName, message){
+    socket.on('sendChannelMessage', function (serverNum, channelName, message) {
         bot.sendChannelMessage(guilds[serverNum], channelName, message)
     })
 })
