@@ -10,6 +10,7 @@ bot.login(process.env.TOKEN)
 
 
 
+
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/public/interface.html")
 })
@@ -18,7 +19,7 @@ app.get('/', function (req, res) {
 
 
 io.on('connection', function (socket) {
-    
+
     var guilds = bot.init()
     socket.emit('guilds', guilds)
     socket.on('serverChannels', (serverName, serverNumber) => {
@@ -33,7 +34,7 @@ io.on('connection', function (socket) {
             messages.forEach(function (message) {
                 msgCount++
                 displayed.push(`${message.author.tag}: Said : ${message.content}`)
-                if (msgCount === 10) {
+                if (msgCount === 25) {
                     displayed.reverse()
                     socket.emit('displayMessages', displayed)
                 }

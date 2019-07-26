@@ -25,7 +25,7 @@ exports.fetchChannels = function (serverName) {
 }
 
 exports.fetchMsgs = async function (serverName, channelName) {
-    fetched = await client.guilds.find(guild => guild.name === serverName).channels.find(channel => channel.name === channelName).fetchMessages({ limit: 10 })
+    fetched = await client.guilds.find(guild => guild.name === serverName).channels.find(channel => channel.name === channelName).fetchMessages({ limit: 25 })
     return fetched
 }
 

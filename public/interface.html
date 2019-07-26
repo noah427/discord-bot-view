@@ -51,7 +51,15 @@
         $(function () {
             var socket = io.connect('http://localhost:8080');
 
-            $("#sendMessage").click(function(event){
+            setInterval(function () {
+                if (localStorage.getItem("current-channel") != null) {
+                    var currentChannel = localStorage.getItem("current-channel")
+                    var currentServer = localStorage.getItem("current-server")
+                    socket.emit('fetchChannelMessages', currentServer, currentChannel)
+                }
+            }, 5000)
+
+            $("#sendMessage").click(function (event) {
                 var currentChannel = localStorage.getItem("current-channel")
                 var currentServer = localStorage.getItem("current-server")
                 var message = $("#writeMessage").val()
@@ -61,11 +69,10 @@
 
 
             socket.on('guilds', function (guilds) {
-                console.log('recieved')
                 for (let i = 0; i < guilds.length; i++) {
-                    console.log(i)
-                    console.log(guilds[i])
-                    $("#navigator").append(`<div class="server" id="serverContainer${i}"><br><h4 class="serverName" id="server${i}">${guilds[i]}</h4></div><br>`);
+                    $("#navigator").append(
+                        `<div class="server" id="serverContainer${i}"><br><h4 class="serverName" id="server${i}">${guilds[i]}</h4></div><br>`
+                    );
                     $(`#server${i}`).click(function (event) {
                         $(`#server${i}`).off('click')
                         socket.emit('serverChannels', guilds[i], i)
@@ -74,7 +81,9 @@
             });
             socket.on('sendChannels', function (channels, serverNumber) {
                 for (let i = 0; i < channels.length; i++) {
-                    $(`#serverContainer${serverNumber}`).append(`<button class="channel" id="server${serverNumber}channel${i}">${channels[i]}</button><br>`);
+                    $(`#serverContainer${serverNumber}`).append(
+                        `<button class="channel" id="server${serverNumber}channel${i}">${channels[i]}</button><br>`
+                    );
                     $(`#server${serverNumber}channel${i}`).click(function (event) {
                         socket.emit('fetchChannelMessages', serverNumber, channels[i]);
                         localStorage.setItem("current-channel", channels[i])
@@ -85,9 +94,11 @@
             socket.on('displayMessages', function (messages) {
                 $('#messageViewer').html('');
                 for (let i = 0; i < messages.length; i++) {
-                    $('#messageViewer').append(`<span class="message" id="message${i}">${messages[i]}</span><br>`);
+                    $('#messageViewer').append(
+                        `<span class="message" id="message${i}">${messages[i]}</span><br>`);
                 }
             });
+
         });
     </script>
 </body>
