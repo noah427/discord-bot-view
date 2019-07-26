@@ -29,14 +29,17 @@ io.on('connection', function (socket) {
     socket.on('fetchChannelMessages', function (serverNum, channelName) {
         var fetched = bot.fetchMsgs(guilds[serverNum], channelName)
         var displayed = []
+        var messageIDs = []
         var msgCount = 0
         fetched.then(function (messages) {
             messages.forEach(function (message) {
                 msgCount++
                 displayed.push(`${message.author.tag}: Said : ${message.content}`)
+                messageIDs.push(message.id)
                 if (msgCount === 25) {
                     displayed.reverse()
-                    socket.emit('displayMessages', displayed)
+                    messageIDs.reverse()
+                    socket.emit('displayMessages', displayed, messageIDs)
                 }
             });
         })

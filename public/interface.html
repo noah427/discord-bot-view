@@ -66,8 +66,7 @@
                 socket.emit('sendChannelMessage', currentServer, currentChannel, message)
                 $("#messageViewer").append(`<span class="message">you said : ${message}</span><br>`)
             })
-
-
+            
             socket.on('guilds', function (guilds) {
                 for (let i = 0; i < guilds.length; i++) {
                     $("#navigator").append(
@@ -91,11 +90,11 @@
                     });
                 };
             });
-            socket.on('displayMessages', function (messages) {
+            socket.on('displayMessages', function (messages, extraInfo) {
                 $('#messageViewer').html('');
+                localStorage.setItem("extra-info", extraInfo)
                 for (let i = 0; i < messages.length; i++) {
-                    $('#messageViewer').append(
-                        `<span class="message" id="message${i}">${messages[i]}</span><br>`);
+                    $('#messageViewer').append(`<span class="message" id="message${i}">${messages[i]}</span><br>`);
                 }
             });
 
