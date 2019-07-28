@@ -51,18 +51,24 @@
         $(function () {
             var socket = io.connect('http://localhost:8080');
 
+            var storage = {
+                "currentChannel" : "",
+                "currentServer" : 0,
+                "extraInfo" : [],
+            }
+
             setInterval(function () {
-                if (localStorage.getItem("current-channel") != null) {
-                    var currentChannel = localStorage.getItem("current-channel")
-                    var currentServer = localStorage.getItem("current-server")
+                if (storage.currentChannel != "") {
+                    var currentChannel = storage.currentChannel
+                    var currentServer = storage.currentServer
                     socket.emit('fetchChannelMessages', currentServer, currentChannel)
                 }
             }, 5000)
 
             $("#sendMessage").click(function (event) {
                 if ($("#writeMessage").val() != "") {
-                    var currentChannel = localStorage.getItem("current-channel")
-                    var currentServer = localStorage.getItem("current-server")
+                    var currentChannel = storage.currentChannel
+                    var currentServer = storage.currentServer
                     var message = $("#writeMessage").val()
                     socket.emit('sendChannelMessage', currentServer, currentChannel, message)
                     $("#messageViewer").append(`<span class="message">you said : ${message}</span><br>`)
@@ -72,8 +78,8 @@
 
             $("body").keypress(function (event) {
                 if ($("#writeMessage").val() != "" && event.key == "Enter") {
-                    var currentChannel = localStorage.getItem("current-channel")
-                    var currentServer = localStorage.getItem("current-server")
+                    var currentChannel = storage.currentChannel
+                    var currentServer = storage.currentServer
                     var message = $("#writeMessage").val()
                     socket.emit('sendChannelMessage', currentServer, currentChannel, message)
                     $("#messageViewer").append(`<span class="message">you said : ${message}</span><br>`)
@@ -99,8 +105,8 @@
                     );
                     $(`#server${serverNumber}channel${i}`).click(function (event) {
                         socket.emit('fetchChannelMessages', serverNumber, channels[i]);
-                        localStorage.setItem("current-channel", channels[i])
-                        localStorage.setItem("current-server", serverNumber)
+                        storage.currentChannel = channels[i]
+                        storage.currentServer = serverNumber
                     });
                 };
             });
