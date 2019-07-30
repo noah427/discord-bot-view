@@ -1,5 +1,7 @@
-create a .env file containing TOKEN= your token
+# an electron application to send and read messages as a bot account
 
-npm install
+## install instructions
 
-npm start then point your browser to localhost:3000
+npm install or double click install.bat
+
+npm start or double click run.bat
