@@ -1,5 +1,7 @@
 # an electron application to send and read messages as a bot account
 
+# DISCLAIMER : this barely works I strongly reccomend you use [6cord](https://gitlab.com/diamondburned/6cord) instead.
+
 ## install instructions
 
 add a file named .env
