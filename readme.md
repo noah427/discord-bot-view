@@ -12,4 +12,3 @@ npm install or double click install.bat
 
 npm start or double click run.bat
 
-# DISCLAIMER : this barely works I strongly reccomend you use [6cord](https://gitlab.com/diamondburned/6cord) instead.

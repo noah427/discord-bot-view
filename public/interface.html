@@ -44,7 +44,7 @@
 <body>
     <div id="navigator"></div>
     <div id="messageViewer"></div><br>
-    <input type="text" id="writeMessage"> <button id="sendMessage">send</button>
+    <input type="text" id="writeMessage"> <button id="sendMessage">send</button> <button id="playSound">play sound</button> <input type="text" id="soundFile">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
@@ -74,6 +74,11 @@
                     $("#messageViewer").append(`<span class="message">you said : ${message}</span><br>`)
                     $("#writeMessage").val("")
                 }
+            })
+
+
+            $("#playSound").click(function (event) {
+                socket.emit("playSound", $("#soundFile").val());
             })
 
             $("body").keypress(function (event) {
