@@ -12,6 +12,14 @@ expressApp.get("/", function(req, res) {
   res.sendFile(__dirname + "/public/interface.html");
 });
 
+expressApp.get("/css", function(req, res) {
+  res.sendFile(__dirname + "/public/main.css");
+});
+
+expressApp.get("/js", function(req, res) {
+  res.sendFile(__dirname + "/public/main.js");
+});
+
 io.on("connection", function(socket) {
   var guilds = bot.init();
   socket.emit("guilds", guilds);
