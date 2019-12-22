@@ -68,9 +68,13 @@ $(function() {
       });
     }
   });
+
   socket.on("displayMessages", function(messages, extraInfo) {
     $("#messageViewer").html("");
+
+    
     localStorage.setItem("extra-info", extraInfo);
+
     for (let i = 0; i < messages.length; i++) {
       $("#messageViewer").append(
         `<span class="message" id="message${i}">${messages[i]}</span><br>`

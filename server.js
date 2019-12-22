@@ -31,7 +31,7 @@ io.on("connection", function(socket) {
   socket.on("fetchChannelMessages", function(serverNum, channelName) {
     var fetched = bot.fetchMsgs(guilds[serverNum], channelName);
 
-    if (fetched === 'was voice') {
+    if (fetched != 'was voice') {
 
       var displayed = [];
 
