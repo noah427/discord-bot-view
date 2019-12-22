@@ -35,7 +35,7 @@ exports.fetchMsgs = async function(serverName, channelName) {
       channel.joinable
         ? channel.join()
         : console.log("fix your fucking perms idiot");
-      return "was voice";
+      return "wasvoice";
     } else {
       console.log("do something here when it's like probably a category");
       return;

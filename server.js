@@ -28,11 +28,10 @@ io.on("connection", function(socket) {
     socket.emit("sendChannels", channels, serverNumber);
   });
 
-  socket.on("fetchChannelMessages", function(serverNum, channelName) {
-    var fetched = bot.fetchMsgs(guilds[serverNum], channelName);
+  socket.on("fetchChannelMessages", async function(serverNum, channelName) {
+    var fetched = bot.fetchMsgs(guilds[serverNum], channelName)
 
-    if (fetched != 'was voice') {
-
+    if (await fetched === "wasvoice") {} else {
       var displayed = [];
 
       var messageIDs = [];
@@ -40,7 +39,6 @@ io.on("connection", function(socket) {
       var msgCount = 0;
 
       fetched.then(function(messages) {
-
         messages.forEach(function(message) {
           msgCount++;
 
@@ -53,18 +51,14 @@ io.on("connection", function(socket) {
             messageIDs.reverse();
             socket.emit("displayMessages", displayed, messageIDs);
           }
-
         });
-
       });
-
     }
   });
 
-  socket.on("playSound", function(soundFile){
+  socket.on("playSound", function(soundFile) {
     bot.playSound(soundFile);
-  })
-
+  });
 
   socket.on("sendChannelMessage", function(serverNum, channelName, message) {
     bot.sendChannelMessage(guilds[serverNum], channelName, message);
