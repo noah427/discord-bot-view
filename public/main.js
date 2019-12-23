@@ -32,14 +32,16 @@ $(function() {
     socket.emit("playSound", $("#soundFile").val());
   });
 
-  $("#changePresence").click(function(event) {
+  $("#changeStatus").click(function(event) {
     let status = $("#status").val();
 
     let presence = {
-      name: $("#customStatus").val(),
+      name: $("#customPresence").val(),
       type: $("#typeOP").val().toUpperCase(),
       url: ""
     };
+
+    console.log(status, presence)
 
     socket.emit("changeStatus", status, presence);
   });
