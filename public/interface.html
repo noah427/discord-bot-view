@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css" />
+  </head>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css">
-</head>
-
-<body>
+  <body>
     <div id="navigator"></div>
-    <div id="messageViewer"></div><br>
-    <input type="text" id="writeMessage" placeholder="Type Message"> <button id="sendMessage" class="submit">send</button> 
+    <div id="messageViewer"></div>
+    <br />
+    <input type="text" id="writeMessage" placeholder="Type Message" class="text" />
+    <button id="sendMessage" class="submit">send</button>
+    <br />
+    <input type="text" id="soundFile" placeholder="Type file name (.mp3)" class="text" />
+    <button id="playSound" class="submit">play sound</button>
+    <br />
+    <hr />
+    <br />
+
+    <input id="customPresence" placeholder="This is your bot's status message" class="text" /> <- this is ur
+    bot's custom status
+    <input id="typeOP" type="text" class="text" placeholder="PLAYING, WATCHING, STREAMING, LISTENING TO" />
     <br>
-    <input type="text" id="soundFile" placeholder="Type file name (.mp3)"> <button id="playSound" class="submit">play sound</button>
+    <input id="status" type="text" class="text" placeholder="dnd, idle, online" />
+
+    <!-- <br />
+    <input type="radio" name="statusType" value="PLAYING" checked> Playing
+    <br />
+    <input type="radio" name="statusType" value="WATCHING"> Watching
+    <br />
+    <input type="radio" name="statusType" value="LISTENING TO"> Listening To
+    <br />
+    <input type="radio" name="statusType" value="STREAMING"> Streaming
+    <br />
+    <input type="url" placeholder="Streaming URL" name="statusTypeUrl">
+    <br /> -->
+
+    <button id="changeStatus" class="submit">Change status</button>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src = "/js">
-    </script>
-</body>
-
+    <script src="/js"></script>
+  </body>
 </html>

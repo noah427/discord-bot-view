@@ -45,14 +45,14 @@ body {
   background-image: -ms-linear-gradient(top, #7289da, #f24437);
   background-image: -o-linear-gradient(top, #7289da, #f24437);
   background-image: linear-gradient(to bottom, #7289da, #f24437);
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 15px;
+  -webkit-border-radius: 17px;
+  -moz-border-radius: 17px;
+  border-radius: 12px;
   color: #ffffff;
   font-family: Verdana;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 100;
-  padding: 15px;
+  padding: 12px;
   box-shadow: 1px 1px 20px 0px #000000;
   -webkit-box-shadow: 1px 1px 20px 0px #000000;
   -moz-box-shadow: 1px 1px 20px 0px #000000;
@@ -71,4 +71,42 @@ body {
   background-image: -o-linear-gradient(top, #f24437, #7289da);
   background-image: linear-gradient(to bottom, #f24437, #7289da);
   text-decoration: none;
+}
+
+
+/* Full-width input fields */
+.text {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.text:focus {
+  background-color: #ddd;
+  outline: none;
+}
+/* Style all input fields */
+.text {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bfbabb;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+/* Style the submit button */
+.buttonSubmit {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Style the container for inputs */
+.container {
+  background-color: #bfbabb;
+  padding: 20px;
 }

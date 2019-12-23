@@ -32,6 +32,18 @@ $(function() {
     socket.emit("playSound", $("#soundFile").val());
   });
 
+  $("#changePresence").click(function(event) {
+    let status = $("#status").val();
+
+    let presence = {
+      name: $("#customStatus").val(),
+      type: $("#typeOP").val().toUpperCase(),
+      url: ""
+    };
+
+    socket.emit("changeStatus", status, presence);
+  });
+
   $("body").keypress(function(event) {
     if ($("#writeMessage").val() != "" && event.key == "Enter") {
       var currentChannel = storage.currentChannel;
@@ -72,7 +84,6 @@ $(function() {
   socket.on("displayMessages", function(messages, extraInfo) {
     $("#messageViewer").html("");
 
-    
     localStorage.setItem("extra-info", extraInfo);
 
     for (let i = 0; i < messages.length; i++) {

@@ -8,6 +8,20 @@ exports.login = function(token) {
   client.login(token);
 };
 
+exports.statusUpdate = function(status, presence) {
+  // if (status != "idle" || "dnd" || "online") return;
+
+  client.user.setPresence({
+    game: {
+      name: presence.name,
+      type: presence.type
+    },
+    status: status
+  });
+
+
+};
+
 exports.init = function() {
   let guilds = [];
   client.guilds.forEach(guild => guilds.push(guild.name));
