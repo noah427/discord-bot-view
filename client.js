@@ -33,9 +33,9 @@ exports.fetchChannels = function(serverName) {
   client.guilds
     .find(server => server.name === serverName)
     .channels.forEach(channel => {
-      // if (channel.type === "text") {
+      if (channel.type != "category") {
       channels.push(channel.name);
-      // }
+      }
     });
   return channels;
 };
@@ -49,10 +49,10 @@ exports.fetchMsgs = async function(serverName, channelName) {
       channel.joinable
         ? channel.join()
         : console.log("fix your fucking perms idiot");
-      return "wasvoice";
+      return "nottext";
     } else {
-      console.log("do something here when it's like probably a category");
-      return;
+      // console.log("do something here when it's like probably a category");
+      return "nottext"
     }
   } else {
     let fetched = await client.guilds

@@ -4,7 +4,7 @@ $(function() {
   var storage = {
     currentChannel: "",
     currentServer: 0,
-    extraInfo: []
+    extraInfo: [/*wtf*/]
   };
 
   setInterval(function() {
@@ -70,6 +70,8 @@ $(function() {
       });
     }
   });
+
+  
   socket.on("sendChannels", function(channels, serverNumber) {
     for (let i = 0; i < channels.length; i++) {
       $(`#serverContainer${serverNumber}`).append(

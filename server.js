@@ -31,7 +31,7 @@ io.on("connection", function(socket) {
   socket.on("fetchChannelMessages", async function(serverNum, channelName) {
     var fetched = bot.fetchMsgs(guilds[serverNum], channelName);
 
-    if ((await fetched) === "wasvoice") {
+    if ((await fetched) === "nottext") {
     } else {
       var displayed = [];
 
@@ -47,11 +47,12 @@ io.on("connection", function(socket) {
 
           messageIDs.push(message.id);
 
-          if (msgCount === 25) {
+          if (msgCount === messages.array().length - 1) {
             displayed.reverse();
             messageIDs.reverse();
             socket.emit("displayMessages", displayed, messageIDs);
           }
+
         });
       });
     }
