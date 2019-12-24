@@ -6,6 +6,8 @@ require("dotenv").config();
 
 const { app, BrowserWindow } = require("electron");
 
+const atMention = /<@!([0-9]{5,})>/g;
+
 bot.login(process.env.TOKEN);
 
 expressApp.get("/", function(req, res) {
@@ -43,7 +45,15 @@ io.on("connection", function(socket) {
         messages.forEach(function(message) {
           msgCount++;
 
-          displayed.push(`${message.author.tag}: Said : ${message.content}`);
+          var parsed;
+
+          if (message.content.match(atMention)) {
+            parsed = mentionReplacer(message.content);
+          } else {
+            parsed = message.content;
+          }
+
+          displayed.push(`${message.author.tag}: Said : ${parsed}`);
 
           messageIDs.push(message.id);
 
@@ -52,7 +62,6 @@ io.on("connection", function(socket) {
             messageIDs.reverse();
             socket.emit("displayMessages", displayed, messageIDs);
           }
-
         });
       });
     }
@@ -73,13 +82,23 @@ io.on("connection", function(socket) {
 
 expressApp.listen("3000", function() {});
 
-app.on("ready", function() {
-  setTimeout(function() {
-    let win = new BrowserWindow({ width: 800, height: 600 });
-    win.on("closed", () => {
-      win = null;
-    });
+if (process.env.ELECTRON != "disabled") {
+  app.on("ready", function() {
+    setTimeout(function() {
+      let win = new BrowserWindow({ width: 800, height: 600 });
+      win.on("closed", () => {
+        win = null;
+      });
 
-    win.loadURL("http://localhost:3000");
-  }, 3000);
-});
+      win.loadURL("http://localhost:3000");
+    }, 3000);
+  });
+}
+
+function mentionReplacer(str = "") {
+  let matches = str.match(atMention);
+  matches.forEach(match => {
+    str = str.replace(match, "@" + bot.userTagFromID(match.replace(/\D/g, "")));
+  });
+  return str;
+}

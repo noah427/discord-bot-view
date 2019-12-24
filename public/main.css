@@ -4,7 +4,7 @@ body {
 }
 #navigator {
   background-color: #2c2f33;
-  height: 280px;
+  height: fit-content;
   padding: 15px;
   overflow: auto;
 }
