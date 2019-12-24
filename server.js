@@ -57,7 +57,7 @@ io.on("connection", function(socket) {
 
           messageIDs.push(message.id);
 
-          if (msgCount === messages.array().length - 1) {
+          if (msgCount === messages.array().length) {
             displayed.reverse();
             messageIDs.reverse();
             socket.emit("displayMessages", displayed, messageIDs);
