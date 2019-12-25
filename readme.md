@@ -2,6 +2,8 @@
 
 ## install instructions
 
+### In order to run you must have nodejs installed [nodejs](https://nodejs.org)
+
 add a file named .env
 
 write TOKEN=the token of the bot account u wanna use
