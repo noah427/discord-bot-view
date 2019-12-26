@@ -15,3 +15,4 @@ npm install or double click install.bat
 npm start or double click run.bat
 
 
+[discord server if you still need help or wanna ask a question](https://discord.gg/5FMAdZf)
