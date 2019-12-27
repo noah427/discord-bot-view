@@ -4,7 +4,7 @@
 
 ### In order to run you must have nodejs installed [nodejs](https://nodejs.org)
 
-add a file named .env
+add a file named .env (if you are having problems with this try create.env.bat)
 
 write TOKEN=the token of the bot account u wanna use
 
