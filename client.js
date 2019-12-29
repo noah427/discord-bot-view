@@ -21,7 +21,9 @@ exports.statusUpdate = function(status, presence) {
 };
 
 exports.userTagFromID = function(id){
-  return client.users.get(String(id)).tag;
+  try {return client.users.get(String(id)).tag} catch (e){
+    return `@!=${id}`
+  }
 }
 
 exports.init = function() {
