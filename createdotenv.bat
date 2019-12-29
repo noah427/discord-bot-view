@@ -1,1 +1,1 @@
-echo "TOKEN=" >> ".env" 
+echo TOKEN= >> ".env" 
