@@ -20,11 +20,15 @@ exports.statusUpdate = function(status, presence) {
   });
 };
 
-exports.userTagFromID = function(id){
-  try {return client.users.get(String(id)).tag} catch (e){
-    return `@!=${id}`
+exports.userTagFromID = function(id) {
+  let tag;
+  try {
+    tag = client.users.get(String(id)).tag;
+  } catch (e) {
+    tag = `!=${id}`;
   }
-}
+  return tag
+};
 
 exports.init = function() {
   let guilds = [];
@@ -49,7 +53,6 @@ exports.fetchMsgs = async function(serverName, channelName) {
     .find(guild => guild.name === serverName)
     .channels.find(channel => channel.name === channelName);
   if (channel.type != "text") {
-
     if (channel.type === "voice") {
       channel.joinable
         ? channel.join()
